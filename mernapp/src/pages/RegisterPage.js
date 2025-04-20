@@ -1,8 +1,8 @@
-// RegisterPage.js
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import './RegisterPage.css'; // Ensure this file is linked correctly
 
-const RegisterPage = () => {
+const RegisterPage = ({ setIsLoggedIn }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
@@ -25,39 +25,44 @@ const RegisterPage = () => {
     const data = await response.json();
 
     if (data.message === 'User registered successfully') {
-      navigate('/login'); // Redirect to login after successful registration
+      navigate('/login'); // Redirect to login page after successful registration
     } else {
       alert(data.message); // Show error message
     }
   };
 
   return (
-    <div>
-      <h2>Register</h2>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          placeholder="Username"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-          required
-        />
-        <input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        />
-        <input
-          type="password"
-          placeholder="Confirm Password"
-          value={confirmPassword}
-          onChange={(e) => setConfirmPassword(e.target.value)}
-          required
-        />
-        <button type="submit">Register</button>
-      </form>
+    <div className="maincont">
+      <div className="register-container">
+        <h2 className="register-title">Register</h2>
+        <form onSubmit={handleSubmit} className="form-container">
+          <input
+            type="text"
+            placeholder="Username"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            required
+            className="input-field"
+          />
+          <input
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+            className="input-field"
+          />
+          <input
+            type="password"
+            placeholder="Confirm Password"
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
+            required
+            className="input-field"
+          />
+          <button type="submit" className="submit-button">Register</button>
+        </form>
+      </div>
     </div>
   );
 };
